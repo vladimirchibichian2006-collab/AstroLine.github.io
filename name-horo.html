@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroLine — Гороскоп по имени</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars-bg"></div>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="main-title">AstroLine</h1>
+                <div class="header-controls">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
+        <span class="theme-icon">🌙</span>
+    </button>
+    <!-- ДОБАВИТЬ ЭТУ СТРОКУ -->
+    <a href="profile.html" class="profile-icon" aria-label="Профиль">
+        <span class="profile-icon-inner">👤</span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</div>
+            </div>
+            
+            <nav class="main-nav" id="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="horoscopes.html" class="nav-link">Гороскопы</a>
+                <a href="compat.html" class="nav-link">Совместимость</a>
+                <a href="moon.html" class="nav-link">Лунный календарь</a>
+                <a href="name-horo.html" class="nav-link active">Гороскоп по имени</a>
+                <a href="test.html" class="nav-link">Тест личности</a>
+                <a href="articles.html" class="nav-link">Статьи</a>
+                <a href="calendar.html" class="nav-link">Календарь</a>
+                <a href="matrix.html" class="nav-link">Матрица</a>
+                
+                <a href="contact.html" class="nav-link">Контакты</a>
+                <a href="about.html" class="nav-link">О сайте</a>
+            </nav>
+        </header>
+        
+        <main>
+            <h2 class="page-title">Гороскоп по имени</h2>
+            <p class="page-subtitle">Узнайте, что звезды приготовили для вашего имени</p>
+            
+            <div class="name-horo-form card">
+                <div class="form-group">
+                    <label for="user-name">Введите ваше имя:</label>
+                    <input type="text" id="user-name" placeholder="Например: Анна" maxlength="20">
+                    <small>Имя должно содержать только буквы</small>
+                </div>
+                <button id="get-name-horo" class="btn btn-primary">Узнать гороскоп</button>
+            </div>
+            
+            <div id="name-result" class="name-result card hidden">
+                <div class="result-header">
+                    <div class="name-icon">✨</div>
+                    <h3>Гороскоп для <span id="result-name"></span></h3>
+                </div>
+                <div class="name-horo-content">
+                    <p id="name-horo-text" class="horo-text"></p>
+                    <div class="name-advice">
+                        <h4>Совет для вас:</h4>
+                        <p id="name-advice-text"></p>
+                    </div>
+                </div>
+                <button id="try-another" class="btn btn-outline">Попробовать другое имя</button>
+            </div>
+        </main>
+        
+        <footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Контакты</h4>
+            <div class="contact-item">
+                <span class="contact-icon">📞</span>
+                <span>+7 (900) 123-45-67</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">✉️</span>
+                <span>astro-info@mail.com</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">👤</span>
+                <span>Автор: Vladimir</span>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Основные разделы</h4>
+            <a href="index.html">Главная</a>
+            <a href="horoscopes.html">Гороскопы</a>
+            <a href="compat.html">Совместимость</a>
+            <a href="moon.html">Лунный календарь</a>
+            <a href="name-horo.html">Гороскоп по имени</a>
+            <a href="test.html">Тест личности</a>
+        </div>
+        <div class="footer-section">
+            <h4>Дополнительно</h4>
+            <a href="articles.html">Статьи</a>
+            <a href="calendar.html">Календарь</a>
+            <a href="matrix.html">Матрица</a>
+            <a href="profile.html">Профиль</a>
+            <a href="contact.html">Контакты</a>
+            <a href="about.html">О сайте</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 AstroLine. Все права защищены.</p>
+    </div>
+</footer>
+    </div>
+    
+    <script src="script.js"></script>
+    <script src="name-horo.js"></script>
+</body>
+</html>

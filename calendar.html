@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroLine — Календарь</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars-bg"></div>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="main-title">AstroLine</h1>
+                <div class="header-controls">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
+        <span class="theme-icon">🌙</span>
+    </button>
+    <!-- ДОБАВИТЬ ЭТУ СТРОКУ -->
+    <a href="profile.html" class="profile-icon" aria-label="Профиль">
+        <span class="profile-icon-inner">👤</span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</div>
+            </div>
+            
+            <nav class="main-nav" id="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="horoscopes.html" class="nav-link">Гороскопы</a>
+                <a href="compat.html" class="nav-link">Совместимость</a>
+                <a href="moon.html" class="nav-link">Лунный календарь</a>
+                <a href="name-horo.html" class="nav-link">Гороскоп по имени</a>
+                <a href="test.html" class="nav-link">Тест личности</a>
+                <a href="articles.html" class="nav-link">Статьи</a>
+                <a href="calendar.html" class="nav-link active">Календарь</a>
+                <a href="matrix.html" class="nav-link">Матрица</a>
+                
+                <a href="contact.html" class="nav-link">Контакты</a>
+                <a href="about.html" class="nav-link">О сайте</a>
+            </nav>
+        </header>
+        
+        <main>
+            <h2 class="page-title">Астрологический календарь</h2>
+            <p class="page-subtitle">Планируйте свои дела в соответствии с лунными фазами и благоприятными днями</p>
+            
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button id="prev-month" class="btn btn-outline">←</button>
+                    <h3 id="current-month"></h3>
+                    <button id="next-month" class="btn btn-outline">→</button>
+                </div>
+                
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Календарь будет генерироваться здесь -->
+                </div>
+                
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <div class="legend-color good-day"></div>
+                        <span>Благоприятный день</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color neutral-day"></div>
+                        <span>Нейтральный день</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color bad-day"></div>
+                        <span>Неблагоприятный день</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Контакты</h4>
+            <div class="contact-item">
+                <span class="contact-icon">📞</span>
+                <span>+7 (900) 123-45-67</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">✉️</span>
+                <span>astro-info@mail.com</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">👤</span>
+                <span>Автор: Vladimir</span>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Основные разделы</h4>
+            <a href="index.html">Главная</a>
+            <a href="horoscopes.html">Гороскопы</a>
+            <a href="compat.html">Совместимость</a>
+            <a href="moon.html">Лунный календарь</a>
+            <a href="name-horo.html">Гороскоп по имени</a>
+            <a href="test.html">Тест личности</a>
+        </div>
+        <div class="footer-section">
+            <h4>Дополнительно</h4>
+            <a href="articles.html">Статьи</a>
+            <a href="calendar.html">Календарь</a>
+            <a href="matrix.html">Матрица</a>
+            <a href="profile.html">Профиль</a>
+            <a href="contact.html">Контакты</a>
+            <a href="about.html">О сайте</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 AstroLine. Все права защищены.</p>
+    </div>
+</footer>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentDate = new Date();
+            
+            const monthNames = [
+                'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+                'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+            ];
+            
+            const dayNames = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+            
+            function renderCalendar(date) {
+                const calendarGrid = document.getElementById('calendar-grid');
+                const currentMonth = document.getElementById('current-month');
+                
+                currentMonth.textContent = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
+                
+                const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+                const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+                const daysInMonth = lastDay.getDate();
+                const startingDay = firstDay.getDay();
+                
+                calendarGrid.innerHTML = '';
+                
+                // Заголовки дней недели
+                for (let i = 0; i < 7; i++) {
+                    const dayHeader = document.createElement('div');
+                    dayHeader.className = 'calendar-day-header';
+                    dayHeader.textContent = dayNames[i];
+                    calendarGrid.appendChild(dayHeader);
+                }
+                
+                // Пустые ячейки перед первым днем месяца
+                for (let i = 0; i < startingDay; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.className = 'calendar-day empty';
+                    calendarGrid.appendChild(emptyDay);
+                }
+                
+                // Дни месяца
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'calendar-day';
+                    
+                    const dayDate = new Date(date.getFullYear(), date.getMonth(), day);
+                    const dayType = getDayType(dayDate);
+                    
+                    dayElement.classList.add(dayType);
+                    dayElement.innerHTML = `
+                        <div class="day-number">${day}</div>
+                        <div class="day-info">${getDayInfo(dayDate)}</div>
+                    `;
+                    
+                    // Подсказка при наведении
+                    dayElement.title = getDayTooltip(dayDate, dayType);
+                    
+                    calendarGrid.appendChild(dayElement);
+                }
+            }
+            
+            function getDayType(date) {
+                const day = date.getDate();
+                const random = (date.getFullYear() * 10000 + date.getMonth() * 100 + day) % 10;
+                
+                if (random < 3) return 'good-day';
+                if (random < 7) return 'neutral-day';
+                return 'bad-day';
+            }
+            
+            function getDayInfo(date) {
+                const day = date.getDate();
+                const random = (date.getFullYear() * 10000 + date.getMonth() * 100 + day) % 5;
+                
+                const icons = ['🌟', '✨', '💫', '⭐', '☀️'];
+                return icons[random];
+            }
+            
+            function getDayTooltip(date, dayType) {
+                const descriptions = {
+                    'good-day': [
+                        'Отличный день для новых начинаний',
+                        'Благоприятное время для финансовых операций',
+                        'Идеальный день для знакомств и встреч',
+                        'Удачное время для творчества'
+                    ],
+                    'neutral-day': [
+                        'Обычный день, действуйте по обстоятельствам',
+                        'Нейтральный период для рутинных дел',
+                        'День ожидания и подготовки',
+                        'Время для планирования'
+                    ],
+                    'bad-day': [
+                        'Будьте осторожны в принятии решений',
+                        'Неблагоприятный день для крупных сделок',
+                        'Возможны недоразумения в общении',
+                        'Лучше отложить важные дела'
+                    ]
+                };
+                
+                const day = date.getDate();
+                const randomIndex = (date.getFullYear() * 10000 + date.getMonth() * 100 + day) % 4;
+                return descriptions[dayType][randomIndex];
+            }
+            
+            // Навигация по месяцам
+            document.getElementById('prev-month').addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                renderCalendar(currentDate);
+            });
+            
+            document.getElementById('next-month').addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                renderCalendar(currentDate);
+            });
+            
+            // Инициализация календаря
+            renderCalendar(currentDate);
+        });
+    </script>
+</body>
+</html>

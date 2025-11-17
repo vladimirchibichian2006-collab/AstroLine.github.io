@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroLine — Гороскопы</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars-bg"></div>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="main-title">AstroLine</h1>
+                <div class="header-controls">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
+        <span class="theme-icon">🌙</span>
+    </button>
+    <!-- ДОБАВИТЬ ЭТУ СТРОКУ -->
+    <a href="profile.html" class="profile-icon" aria-label="Профиль">
+        <span class="profile-icon-inner">👤</span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</div>
+            </div>
+            
+            <nav class="main-nav" id="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="horoscopes.html" class="nav-link active">Гороскопы</a>
+                <a href="compat.html" class="nav-link">Совместимость</a>
+                <a href="moon.html" class="nav-link">Лунный календарь</a>
+                <a href="name-horo.html" class="nav-link">Гороскоп по имени</a>
+                <a href="test.html" class="nav-link">Тест личности</a>
+                <a href="articles.html" class="nav-link">Статьи</a>
+                <a href="calendar.html" class="nav-link">Календарь</a>
+                <a href="matrix.html" class="nav-link">Матрица</a>
+                
+                <a href="contact.html" class="nav-link">Контакты</a>
+                <a href="about.html" class="nav-link">О сайте</a>
+            </nav>
+        </header>
+        
+        <main>
+            <h2 class="page-title">Гороскопы</h2>
+            <p class="page-subtitle">Узнайте, что приготовили для вас звезды на разные периоды</p>
+            
+            <div class="period-tabs">
+                <button class="period-tab active" data-period="daily">Сегодня</button>
+                <button class="period-tab" data-period="weekly">Неделя</button>
+                <button class="period-tab" data-period="monthly">Месяц</button>
+            </div>
+            
+            <div id="horoscopes-container" class="horoscopes-grid">
+                <!-- Гороскопы будут загружаться здесь -->
+            </div>
+        </main>
+        
+        <footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Контакты</h4>
+            <div class="contact-item">
+                <span class="contact-icon">📞</span>
+                <span>+7 (900) 123-45-67</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">✉️</span>
+                <span>astro-info@mail.com</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">👤</span>
+                <span>Автор: Vladimir</span>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Основные разделы</h4>
+            <a href="index.html">Главная</a>
+            <a href="horoscopes.html">Гороскопы</a>
+            <a href="compat.html">Совместимость</a>
+            <a href="moon.html">Лунный календарь</a>
+            <a href="name-horo.html">Гороскоп по имени</a>
+            <a href="test.html">Тест личности</a>
+        </div>
+        <div class="footer-section">
+            <h4>Дополнительно</h4>
+            <a href="articles.html">Статьи</a>
+            <a href="calendar.html">Календарь</a>
+            <a href="matrix.html">Матрица</a>
+            <a href="profile.html">Профиль</a>
+            <a href="contact.html">Контакты</a>
+            <a href="about.html">О сайте</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 AstroLine. Все права защищены.</p>
+    </div>
+</footer>
+    </div>
+    
+    <script src="script.js"></script>
+    <script src="dailyData.js"></script>
+    <script src="weekData.js"></script>
+    <script src="monthData.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabs = document.querySelectorAll('.period-tab');
+        const container = document.getElementById('horoscopes-container');
+        
+        // Функция для получения правильного имени файла
+        function getImageName(sign) {
+            const imageMap = {
+                'Овен': 'aries',
+                'Телец': 'taurus', 
+                'Близнецы': 'gemini',
+                'Рак': 'cancer',
+                'Лев': 'leo',
+                'Дева': 'virgo',
+                'Весы': 'libra',
+                'Скорпион': 'scorpio',
+                'Стрелец': 'sagittarius',
+                'Козерог': 'capricorn',
+                'Водолей': 'aquarius',
+                'Рыбы': 'pisces'
+            };
+            return imageMap[sign] || sign.toLowerCase();
+        }
+        
+        function loadHoroscopes(period) {
+            let data;
+            switch(period) {
+                case 'daily': data = dailyHoroscopes; break;
+                case 'weekly': data = weekHoroscopes; break;
+                case 'monthly': data = monthHoroscopes; break;
+            }
+            
+            container.innerHTML = '';
+            
+            for (const [sign, text] of Object.entries(data)) {
+                const horoscopeCard = document.createElement('div');
+                horoscopeCard.className = 'horoscope-card card';
+                horoscopeCard.innerHTML = `
+                    <div class="horoscope-header">
+                        <img src="images/${getImageName(sign)}.jpg" alt="${sign}" class="zodiac-icon-small">
+                        <h3>${sign}</h3>
+                    </div>
+                    <p class="horoscope-text">${text}</p>
+                    <div class="horoscope-period">${getPeriodLabel(period)}</div>
+                `;
+                container.appendChild(horoscopeCard);
+            }
+        }
+        
+        function getPeriodLabel(period) {
+            switch(period) {
+                case 'daily': return 'На сегодня';
+                case 'weekly': return 'На неделю';
+                case 'monthly': return 'На месяц';
+            }
+        }
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                loadHoroscopes(this.dataset.period);
+            });
+        });
+        
+        // Загружаем гороскопы на сегодня по умолчанию
+        loadHoroscopes('daily');
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroLine — Матрица Судьбы</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars-bg"></div>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="main-title">AstroLine</h1>
+                <div class="header-controls">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
+        <span class="theme-icon">🌙</span>
+    </button>
+    <!-- ДОБАВИТЬ ЭТУ СТРОКУ -->
+    <a href="profile.html" class="profile-icon" aria-label="Профиль">
+        <span class="profile-icon-inner">👤</span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</div>
+            </div>
+            
+            <nav class="main-nav" id="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="horoscopes.html" class="nav-link">Гороскопы</a>
+                <a href="compat.html" class="nav-link">Совместимость</a>
+                <a href="moon.html" class="nav-link">Лунный календарь</a>
+                <a href="name-horo.html" class="nav-link">Гороскоп по имени</a>
+                <a href="test.html" class="nav-link">Тест личности</a>
+                <a href="articles.html" class="nav-link">Статьи</a>
+                <a href="calendar.html" class="nav-link">Календарь</a>
+                <a href="matrix.html" class="nav-link active">Матрица</a>
+                
+                <a href="contact.html" class="nav-link">Контакты</a>
+                <a href="about.html" class="nav-link">О сайте</a>
+            </nav>
+        </header>
+        
+        <main>
+            <h2 class="page-title">Матрица Судьбы</h2>
+            <p class="page-subtitle">Рассчитайте свою нумерологическую матрицу по дате рождения</p>
+            
+            <div class="matrix-container">
+                <div class="matrix-form card">
+                    <h3>Введите дату рождения</h3>
+                    <form id="matrix-form">
+                        <div class="form-group">
+                            <label for="matrix-birth-date">Дата рождения:</label>
+                            <input type="date" id="matrix-birth-date" name="birthDate" required>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Рассчитать</button>
+                            <button type="button" id="clear-matrix" class="btn btn-outline">Очистить</button>
+                            <button type="button" id="save-matrix" class="btn btn-secondary" style="display: none;">Сохранить результат</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="matrix-results" id="matrix-results" style="display: none;">
+                    <div class="matrix-grid card">
+                        <h3>Ваша матрица судьбы</h3>
+                        <div class="matrix-3x3" id="matrix-grid">
+                            <!-- Сетка 3x3 будет генерироваться здесь -->
+                        </div>
+                    </div>
+                    
+                    <div class="matrix-details card">
+                        <h3>Значения чисел</h3>
+                        <div class="number-meanings" id="number-meanings">
+                            <!-- Значения чисел будут генерироваться здесь -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Контакты</h4>
+            <div class="contact-item">
+                <span class="contact-icon">📞</span>
+                <span>+7 (900) 123-45-67</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">✉️</span>
+                <span>astro-info@mail.com</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">👤</span>
+                <span>Автор: Vladimir</span>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Основные разделы</h4>
+            <a href="index.html">Главная</a>
+            <a href="horoscopes.html">Гороскопы</a>
+            <a href="compat.html">Совместимость</a>
+            <a href="moon.html">Лунный календарь</a>
+            <a href="name-horo.html">Гороскоп по имени</a>
+            <a href="test.html">Тест личности</a>
+        </div>
+        <div class="footer-section">
+            <h4>Дополнительно</h4>
+            <a href="articles.html">Статьи</a>
+            <a href="calendar.html">Календарь</a>
+            <a href="matrix.html">Матрица</a>
+            <a href="profile.html">Профиль</a>
+            <a href="contact.html">Контакты</a>
+            <a href="about.html">О сайте</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 AstroLine. Все права защищены.</p>
+    </div>
+</footer>
+    </div>
+    
+    <script src="script.js"></script>
+    <script src="matrixCalculator.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const matrixForm = document.getElementById('matrix-form');
+            const matrixResults = document.getElementById('matrix-results');
+            const clearBtn = document.getElementById('clear-matrix');
+            const saveBtn = document.getElementById('save-matrix');
+            const calculator = new MatrixCalculator();
+            
+            // Загрузка сохраненной матрицы
+            const savedMatrix = localStorage.getItem('savedMatrix');
+            if (savedMatrix) {
+                const matrixData = JSON.parse(savedMatrix);
+                displayMatrixResults(matrixData);
+            }
+            
+            matrixForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const birthDate = new Date(document.getElementById('matrix-birth-date').value);
+                
+                if (isNaN(birthDate.getTime())) {
+                    alert('Пожалуйста, введите корректную дату рождения');
+                    return;
+                }
+                
+                const matrixData = calculator.calculateMatrix(birthDate);
+                displayMatrixResults(matrixData);
+                saveBtn.style.display = 'block';
+            });
+            
+            clearBtn.addEventListener('click', function() {
+                matrixForm.reset();
+                matrixResults.style.display = 'none';
+                saveBtn.style.display = 'none';
+                localStorage.removeItem('savedMatrix');
+            });
+            
+            saveBtn.addEventListener('click', function() {
+                const birthDate = new Date(document.getElementById('matrix-birth-date').value);
+                const matrixData = calculator.calculateMatrix(birthDate);
+                localStorage.setItem('savedMatrix', JSON.stringify(matrixData));
+                alert('Результат сохранен!');
+            });
+            
+            function displayMatrixResults(matrixData) {
+                // Отображение сетки 3x3
+                const grid = calculator.generateMatrixGrid(matrixData);
+                const matrixGrid = document.getElementById('matrix-grid');
+                matrixGrid.innerHTML = '';
+                
+                grid.forEach((number, index) => {
+                    const cell = document.createElement('div');
+                    cell.className = `matrix-cell ${number ? 'filled' : 'empty'}`;
+                    if (number) {
+                        cell.textContent = number;
+                        cell.title = calculator.numberMeanings[number] || 'Особое значение';
+                    }
+                    matrixGrid.appendChild(cell);
+                });
+                
+                // Отображение значений чисел
+                const meaningsContainer = document.getElementById('number-meanings');
+                meaningsContainer.innerHTML = `
+                    <div class="meaning-item">
+                        <span class="meaning-number">${matrixData.destinyNumber.number}</span>
+                        <div class="meaning-text">
+                            <strong>Число судьбы:</strong> ${matrixData.destinyNumber.meaning}
+                        </div>
+                    </div>
+                    <div class="meaning-item">
+                        <span class="meaning-number">${matrixData.characterNumber.number}</span>
+                        <div class="meaning-text">
+                            <strong>Число характера:</strong> ${matrixData.characterNumber.meaning}
+                        </div>
+                    </div>
+                    <div class="meaning-item">
+                        <span class="meaning-number">${matrixData.heartNumber.number}</span>
+                        <div class="meaning-text">
+                            <strong>Число сердца:</strong> ${matrixData.heartNumber.meaning}
+                        </div>
+                    </div>
+                    <div class="meaning-item">
+                        <span class="meaning-number">${matrixData.additionalNumbers.first.number}</span>
+                        <div class="meaning-text">
+                            <strong>Дополнительное число 1:</strong> ${matrixData.additionalNumbers.first.meaning}
+                        </div>
+                    </div>
+                    <div class="meaning-item">
+                        <span class="meaning-number">${matrixData.additionalNumbers.second.number}</span>
+                        <div class="meaning-text">
+                            <strong>Дополнительное число 2:</strong> ${matrixData.additionalNumbers.second.meaning}
+                        </div>
+                    </div>
+                    <div class="meaning-item">
+                        <span class="meaning-number">${matrixData.additionalNumbers.third.number}</span>
+                        <div class="meaning-text">
+                            <strong>Дополнительное число 3:</strong> ${matrixData.additionalNumbers.third.meaning}
+                        </div>
+                    </div>
+                `;
+                
+                matrixResults.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

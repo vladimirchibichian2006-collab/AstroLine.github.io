@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroLine — Лунный календарь</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars-bg"></div>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="main-title">AstroLine</h1>
+               <div class="header-controls">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
+        <span class="theme-icon">🌙</span>
+    </button>
+    <!-- ДОБАВИТЬ ЭТУ СТРОКУ -->
+    <a href="profile.html" class="profile-icon" aria-label="Профиль">
+        <span class="profile-icon-inner">👤</span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</div>
+            </div>
+            
+            <nav class="main-nav" id="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="horoscopes.html" class="nav-link">Гороскопы</a>
+                <a href="compat.html" class="nav-link">Совместимость</a>
+                <a href="moon.html" class="nav-link active">Лунный календарь</a>
+                <a href="name-horo.html" class="nav-link">Гороскоп по имени</a>
+                <a href="test.html" class="nav-link">Тест личности</a>
+                <a href="articles.html" class="nav-link">Статьи</a>
+                <a href="calendar.html" class="nav-link">Календарь</a>
+                <a href="matrix.html" class="nav-link">Матрица</a>
+                
+                <a href="contact.html" class="nav-link">Контакты</a>
+                <a href="about.html" class="nav-link">О сайте</a>
+            </nav>
+        </header>
+        
+        <main>
+            <h2 class="page-title">Лунный календарь</h2>
+            <p class="page-subtitle">Следите за лунными фазами и планируйте свои дела в гармонии с Луной</p>
+            
+            <div class="moon-current card">
+                <div class="moon-phase-large">
+                    <div id="moon-visual" class="moon-visual"></div>
+                    <div class="moon-info">
+                        <h3 id="current-phase">Загрузка...</h3>
+                        <p id="phase-description"></p>
+                        <div class="moon-stats">
+                            <div class="moon-stat">
+                                <span class="stat-label">Лунный день:</span>
+                                <span id="moon-day" class="stat-value">-</span>
+                            </div>
+                            <div class="moon-stat">
+                                <span class="stat-label">Видимость:</span>
+                                <span id="moon-visibility" class="stat-value">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="moon-forecast">
+                <h3>Лунный прогноз на 3 дня</h3>
+                <div class="forecast-grid">
+                    <div class="forecast-day card">
+                        <h4>Сегодня</h4>
+                        <div class="moon-phase-small" id="moon-today"></div>
+                        <p id="forecast-today" class="forecast-text">Загрузка...</p>
+                    </div>
+                    <div class="forecast-day card">
+                        <h4>Завтра</h4>
+                        <div class="moon-phase-small" id="moon-tomorrow"></div>
+                        <p id="forecast-tomorrow" class="forecast-text">Загрузка...</p>
+                    </div>
+                    <div class="forecast-day card">
+                        <h4>Послезавтра</h4>
+                        <div class="moon-phase-small" id="moon-dayafter"></div>
+                        <p id="forecast-dayafter" class="forecast-text">Загрузка...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="moon-recommendations card">
+                <h3>Рекомендации на сегодня</h3>
+                <div class="recommendations-grid">
+                    <div class="recommendation good">
+                        <div class="rec-icon">✅</div>
+                        <h4>Благоприятно</h4>
+                        <ul id="favorable-list">
+                            <li>Загрузка рекомендаций...</li>
+                        </ul>
+                    </div>
+                    <div class="recommendation bad">
+                        <div class="rec-icon">❌</div>
+                        <h4>Неблагоприятно</h4>
+                        <ul id="unfavorable-list">
+                            <li>Загрузка рекомендаций...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Контакты</h4>
+            <div class="contact-item">
+                <span class="contact-icon">📞</span>
+                <span>+7 (900) 123-45-67</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">✉️</span>
+                <span>astro-info@mail.com</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">👤</span>
+                <span>Автор: Vladimir</span>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Основные разделы</h4>
+            <a href="index.html">Главная</a>
+            <a href="horoscopes.html">Гороскопы</a>
+            <a href="compat.html">Совместимость</a>
+            <a href="moon.html">Лунный календарь</a>
+            <a href="name-horo.html">Гороскоп по имени</a>
+            <a href="test.html">Тест личности</a>
+        </div>
+        <div class="footer-section">
+            <h4>Дополнительно</h4>
+            <a href="articles.html">Статьи</a>
+            <a href="calendar.html">Календарь</a>
+            <a href="matrix.html">Матрица</a>
+            <a href="profile.html">Профиль</a>
+            <a href="contact.html">Контакты</a>
+            <a href="about.html">О сайте</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 AstroLine. Все права защищены.</p>
+    </div>
+</footer>
+    </div>
+    
+    <script src="script.js"></script>
+    <script src="moon.js"></script>
+</body>
+</html>

@@ -1,0 +1,2694 @@
+/* CSS переменные для темной и светлой темы */
+:root {
+  /* Темная тема (по умолчанию) */
+  --bg-primary: #0f0c29;
+  --bg-secondary: #302b63;
+  --bg-tertiary: #24243e;
+  --text-primary: #ffffff;
+  --text-secondary: #b8b8ff;
+  --text-muted: #a0a0c0;
+  --accent-primary: #ff6b6b;
+  --accent-secondary: #4d96ff;
+  --accent-tertiary: #6bcf7f;
+  --accent-warning: #ffd93d;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --card-border: rgba(255, 255, 255, 0.2);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --input-bg: rgba(0, 0, 0, 0.3);
+  --input-border: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f0f2f5;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e4e6eb;
+  --text-primary: #1c1e21;
+  --text-secondary: #65676b;
+  --text-muted: #8a8d91;
+  --accent-primary: #e41e3f;
+  --accent-secondary: #1877f2;
+  --accent-tertiary: #42b883;
+  --accent-warning: #f7b928;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-border: rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --input-bg: rgba(255, 255, 255, 0.8);
+  --input-border: rgba(0, 0, 0, 0.2);
+}
+
+/* Общие стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+body {
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+.stars-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary), var(--bg-tertiary));
+  z-index: -2;
+}
+
+.stars-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+      radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
+      radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
+      radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
+  background-size: 550px 550px, 350px 350px, 250px 250px;
+  background-position: 0 0, 40px 60px, 130px 270px;
+  animation: twinkle 8s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Шапка */
+header {
+  margin-bottom: 40px;
+  padding-top: 20px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.main-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-warning), var(--accent-tertiary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  to {
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+  }
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 15px;
+  color: var(--accent-warning);
+  text-shadow: 0 0 10px rgba(255, 217, 61, 0.5);
+}
+
+.page-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Навигация */
+.main-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+  padding: 15px 0;
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 20px;
+  position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--text-primary);
+  background: var(--card-bg);
+  text-shadow: 0 0 10px var(--text-secondary);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-warning);
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 24px;
+  justify-content: space-between;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: var(--text-primary);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Кнопка переключения темы */
+.theme-toggle {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--accent-warning);
+}
+
+.theme-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+[data-theme="light"] .theme-icon {
+  transform: rotate(180deg);
+}
+
+/* Анимации появления */
+.animate-fade-in {
+  animation: fadeIn 1.5s ease-out;
+}
+
+.animate-fade-in-delay {
+  animation: fadeIn 1.5s ease-out 0.5s both;
+}
+
+.animate-fade-in-delay-2 {
+  animation: fadeIn 1.5s ease-out 1s both;
+}
+
+.animate-fade-in-delay-3 {
+  animation: fadeIn 1.5s ease-out 1.5s both;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Герой-секция */
+.hero-section {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 30px 20px;
+  border-radius: 20px;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.hero-title {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  color: var(--accent-warning);
+}
+
+.hero-text {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Сетка знаков зодиака */
+.zodiac-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.zodiac-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px;
+  background: var(--card-bg);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.zodiac-item:hover {
+  transform: translateY(-10px);
+  background: var(--card-bg);
+  box-shadow: 0 10px 25px var(--shadow-color), 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.zodiac-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.zodiac-item:hover .zodiac-icon {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.zodiac-item img {
+  width: 50px;
+  height: 50px;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.zodiac-item span {
+  font-weight: 600;
+  color: var(--text-primary);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Карточки функций */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 30px 25px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 10px 30px var(--shadow-color);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px var(--shadow-color);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--accent-warning);
+}
+
+.feature-card p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+/* Карточки */
+.card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 10px 30px var(--shadow-color);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 15px 40px var(--shadow-color);
+}
+
+/* Кнопки */
+.btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+}
+
+.btn-secondary {
+  background: linear-gradient(45deg, var(--accent-secondary), var(--accent-tertiary));
+  color: white;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(77, 150, 255, 0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--accent-warning);
+}
+
+.btn-outline:hover {
+  background: var(--accent-warning);
+  color: var(--bg-primary);
+  transform: translateY(-5px);
+}
+
+/* Контент знака */
+.sign-content {
+  animation: fadeIn 1s ease-out;
+}
+
+.sign-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.sign-icon-large {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  padding: 15px;
+}
+
+.sign-name {
+  font-size: 2.5rem;
+  color: var(--accent-warning);
+  text-shadow: 0 0 10px rgba(255, 217, 61, 0.5);
+}
+
+.sign-description {
+  margin-bottom: 30px;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 25px;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+}
+
+.sign-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.detail-card {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 20px;
+  border-left: 4px solid;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+}
+
+.detail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+.detail-card h3 {
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.detail-card ul {
+  list-style-type: none;
+}
+
+.detail-card li {
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.detail-card li::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  color: var(--accent-warning);
+}
+
+.character-card {
+  border-left-color: var(--accent-primary);
+}
+
+.strengths-card {
+  border-left-color: var(--accent-tertiary);
+}
+
+.weaknesses-card {
+  border-left-color: var(--accent-secondary);
+}
+
+.advice-section {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 25px;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+}
+
+.advice-tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.advice-tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+  color: var(--text-secondary);
+}
+
+.advice-tab.active {
+  border-bottom-color: var(--accent-warning);
+  color: var(--accent-warning);
+}
+
+.advice-tab:hover {
+  color: var(--accent-warning);
+}
+
+.advice-content {
+  line-height: 1.6;
+}
+
+.advice-item {
+  display: none;
+}
+
+.advice-item.active {
+  display: block;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+}
+
+/* Формы */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--accent-warning);
+}
+
+select {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 1rem;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--accent-warning);
+  box-shadow: 0 0 10px rgba(255, 217, 61, 0.5);
+}
+
+.compat-form, .daily-form {
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Цитата дня */
+.quote-card {
+  text-align: center;
+  margin-bottom: 30px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.quote-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.quote-card p {
+  font-size: 1.2rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* Результаты совместимости */
+.compat-result {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeIn 1s ease-out;
+  text-align: center;
+}
+
+.compat-header {
+  margin-bottom: 30px;
+}
+
+.compat-signs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.compat-sign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.compat-sign img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.compat-heart {
+  font-size: 2rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.compat-percentage {
+  margin-bottom: 30px;
+}
+
+.percentage-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  position: relative;
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.percentage-circle::before {
+  content: '';
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: var(--card-bg);
+}
+
+.percentage-circle span {
+  position: relative;
+  z-index: 1;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-warning), var(--accent-tertiary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.compat-description h3 {
+  color: var(--accent-warning);
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+}
+
+.compat-description p {
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.compat-advice {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 20px;
+  border-left: 4px solid var(--accent-secondary);
+  text-align: left;
+}
+
+.compat-advice h4 {
+  color: var(--accent-secondary);
+  margin-bottom: 10px;
+}
+
+/* Гороскоп */
+.horoscope-result {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeIn 1s ease-out;
+}
+
+.horoscope-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 15px;
+}
+
+.horoscope-header img {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  padding: 8px;
+}
+
+.horoscope-header h3 {
+  color: var(--accent-warning);
+  font-size: 1.8rem;
+}
+
+.horoscope-result p {
+  line-height: 1.6;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.horoscope-date {
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: right;
+}
+
+/* О сайте */
+.about-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.about-card {
+  transition: all 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px var(--shadow-color);
+}
+
+.about-card h3 {
+  color: var(--accent-warning);
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.about-card p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.about-card ul {
+  list-style-type: none;
+}
+
+.about-card li {
+  margin-bottom: 10px;
+  padding-left: 25px;
+  position: relative;
+}
+
+.about-card li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--accent-warning);
+}
+
+/* Тест личности */
+.test-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.test-start {
+  text-align: center;
+  padding: 40px 30px;
+}
+
+.test-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.test-start h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: var(--accent-warning);
+}
+
+.test-start p {
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: var(--text-secondary);
+}
+
+.test-progress {
+  margin-bottom: 30px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--card-bg);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.question-card {
+  margin-bottom: 30px;
+  padding: 30px;
+}
+
+.question-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 25px;
+  color: var(--accent-warning);
+  text-align: center;
+}
+
+.answers {
+  display: grid;
+  gap: 15px;
+}
+
+.answer-btn {
+  padding: 15px 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.answer-btn:hover {
+  background: var(--accent-secondary);
+  color: white;
+  transform: translateX(5px);
+}
+
+.answer-btn.selected {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+}
+
+.test-navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.test-result {
+  text-align: center;
+  padding: 40px 30px;
+}
+
+.result-header {
+  margin-bottom: 30px;
+}
+
+.result-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.result-header h3 {
+  font-size: 2rem;
+  color: var(--accent-warning);
+}
+
+.result-content {
+  text-align: left;
+}
+
+.result-zodiac {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 25px;
+  padding: 20px;
+  background: var(--card-bg);
+  border-radius: 15px;
+}
+
+.result-zodiac img {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.result-info h4 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: var(--accent-warning);
+}
+
+.element-badge {
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.result-description {
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.result-advice {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 20px;
+  border-left: 4px solid var(--accent-tertiary);
+  margin-bottom: 30px;
+}
+
+.result-advice h4 {
+  color: var(--accent-tertiary);
+  margin-bottom: 10px;
+}
+
+.result-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Утилиты */
+.hidden {
+  display: none !important;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .container {
+      padding: 15px;
+  }
+  
+  .main-title {
+      font-size: 2.5rem;
+  }
+  
+  .subtitle {
+      font-size: 1.2rem;
+  }
+  
+  .page-title {
+      font-size: 2rem;
+  }
+  
+  .hero-title {
+      font-size: 1.8rem;
+  }
+  
+  .hero-text {
+      font-size: 1.1rem;
+  }
+  
+  .zodiac-grid {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+  }
+  
+  .zodiac-icon {
+      width: 60px;
+      height: 60px;
+  }
+  
+  .zodiac-item img {
+      width: 40px;
+      height: 40px;
+  }
+  
+  .features-grid {
+      grid-template-columns: 1fr;
+  }
+  
+  .main-nav {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      display: none;
+  }
+  
+  .main-nav.active {
+      display: flex;
+  }
+  
+  .menu-toggle {
+      display: flex;
+  }
+  
+  .nav-link.active::after {
+      bottom: -10px;
+  }
+  
+  .sign-header {
+      justify-content: center;
+      text-align: center;
+  }
+  
+  .sign-icon-large {
+      width: 100px;
+      height: 100px;
+  }
+  
+  .sign-name {
+      font-size: 2rem;
+  }
+  
+  .compat-signs {
+      flex-direction: column;
+  }
+  
+  .percentage-circle {
+      width: 120px;
+      height: 120px;
+  }
+  
+  .percentage-circle::before {
+      width: 100px;
+      height: 100px;
+  }
+  
+  .percentage-circle span {
+      font-size: 2rem;
+  }
+  
+  .result-actions {
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .result-actions .btn {
+      width: 100%;
+      max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+      padding: 10px;
+  }
+  
+  .main-title {
+      font-size: 2rem;
+  }
+  
+  .zodiac-grid {
+      grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .sign-content, .compat-form, .daily-form, .compat-result, .horoscope-result {
+      padding: 20px;
+  }
+  
+  .detail-card {
+      padding: 15px;
+  }
+  
+  .test-start, .question-card, .test-result {
+      padding: 25px 20px;
+  }
+  
+  .result-zodiac {
+      flex-direction: column;
+      text-align: center;
+  }
+}
+/* Футер сайта */
+.site-footer {
+    background: var(--card-bg);
+    border-top: 1px solid var(--card-border);
+    margin-top: 50px;
+    padding: 40px 0 20px;
+    backdrop-filter: blur(10px);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-section h4 {
+    color: var(--accent-warning);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-section a {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: var(--accent-warning);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+
+.contact-icon {
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--card-border);
+    color: var(--text-muted);
+}
+
+/* Стили для лунного календаря */
+.moon-current {
+    margin-bottom: 30px;
+}
+
+.moon-phase-large {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.moon-visual {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: var(--accent-warning);
+    box-shadow: 0 0 30px rgba(255, 217, 61, 0.3);
+    transition: all 0.5s ease;
+}
+
+.moon-info h3 {
+    color: var(--accent-warning);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.moon-stats {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.moon-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-warning);
+}
+
+.moon-forecast {
+    margin-bottom: 30px;
+}
+
+.moon-forecast h3 {
+    margin-bottom: 20px;
+    color: var(--accent-warning);
+}
+
+.forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.forecast-day {
+    text-align: center;
+    padding: 20px;
+}
+
+.forecast-day h4 {
+    margin-bottom: 15px;
+    color: var(--accent-primary);
+}
+
+.moon-phase-small {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--accent-warning);
+    margin: 0 auto 15px;
+    box-shadow: 0 0 15px rgba(255, 217, 61, 0.2);
+}
+
+.forecast-text {
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+.moon-recommendations h3 {
+    margin-bottom: 20px;
+    color: var(--accent-warning);
+}
+
+.recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.recommendation {
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.recommendation.good {
+    background: rgba(107, 207, 127, 0.1);
+    border-left: 4px solid var(--accent-tertiary);
+}
+
+.recommendation.bad {
+    background: rgba(255, 107, 107, 0.1);
+    border-left: 4px solid var(--accent-primary);
+}
+
+.rec-icon {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.recommendation h4 {
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+.recommendation ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recommendation li {
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.recommendation li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--accent-warning);
+}
+
+/* Стили для гороскопа по имени */
+.name-horo-form {
+    max-width: 500px;
+    margin: 0 auto 30px;
+    text-align: center;
+}
+
+.name-horo-form input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.name-horo-form input:focus {
+    outline: none;
+    border-color: var(--accent-warning);
+    box-shadow: 0 0 10px rgba(255, 217, 61, 0.3);
+}
+
+.name-horo-form small {
+    display: block;
+    margin-top: 5px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.name-result {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.result-header {
+    margin-bottom: 25px;
+}
+
+.name-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.name-result h3 {
+    color: var(--accent-warning);
+    font-size: 1.5rem;
+}
+
+.horo-text {
+    line-height: 1.6;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.name-advice {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+    border-left: 4px solid var(--accent-secondary);
+}
+
+.name-advice h4 {
+    color: var(--accent-secondary);
+    margin-bottom: 10px;
+}
+
+/* Адаптивность для новых элементов */
+@media (max-width: 768px) {
+    .moon-phase-large {
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .moon-stats {
+        justify-content: center;
+    }
+    
+    .forecast-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .recommendations-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .contact-item {
+        justify-content: center;
+    }
+}
+/* Дополнительные стили для новых функций */
+
+/* Стили для страницы гороскопов */
+.period-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 10px;
+}
+
+.period-tab {
+    padding: 12px 24px;
+    border: none;
+    background: var(--card-bg);
+    color: var(--text-secondary);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.period-tab.active {
+    background: var(--accent-primary);
+    color: white;
+}
+
+.period-tab:hover:not(.active) {
+    background: var(--accent-secondary);
+    color: white;
+}
+
+.horoscopes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.horoscope-card {
+    transition: transform 0.3s ease;
+}
+
+.horoscope-card:hover {
+    transform: translateY(-5px);
+}
+
+.horoscope-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 15px;
+}
+
+.zodiac-icon-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px;
+}
+
+.horoscope-period {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--card-border);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Стили для статей */
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.article-card {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+}
+
+.article-image {
+    height: 200px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    border-radius: 15px 15px 0 0;
+    margin: -30px -30px 20px -30px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 15px;
+}
+
+.article-category {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--bg-primary);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.article-content h3 {
+    margin-bottom: 10px;
+    color: var(--accent-warning);
+}
+
+.article-excerpt {
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.article-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.article-date {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Стили для отдельной статьи */
+.article-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--accent-secondary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.back-link:hover {
+    color: var(--accent-primary);
+}
+
+.article-full {
+    padding: 40px;
+}
+
+.article-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.article-category-badge {
+    display: inline-block;
+    background: var(--accent-primary);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.article-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--accent-warning);
+}
+
+.article-meta-full {
+    color: var(--text-muted);
+}
+
+.article-body {
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.article-body h2 {
+    color: var(--accent-warning);
+    margin: 30px 0 15px 0;
+}
+
+.article-body h3 {
+    color: var(--accent-secondary);
+    margin: 25px 0 12px 0;
+}
+
+.article-body ul {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.article-body li {
+    margin-bottom: 8px;
+}
+
+.article-footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--card-border);
+    text-align: center;
+}
+
+/* Стили для календаря */
+.calendar-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.calendar-day-header {
+    text-align: center;
+    font-weight: 600;
+    padding: 10px;
+    color: var(--accent-warning);
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.calendar-day:hover {
+    transform: scale(1.05);
+    border-color: var(--accent-warning);
+}
+
+.calendar-day.empty {
+    background: transparent;
+    cursor: default;
+}
+
+.calendar-day.empty:hover {
+    transform: none;
+    border-color: transparent;
+}
+
+.day-number {
+    font-weight: 600;
+}
+
+.day-info {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+/* Типы дней */
+.good-day {
+    border-color: var(--accent-tertiary);
+    background: rgba(107, 207, 127, 0.1);
+}
+
+.neutral-day {
+    border-color: var(--accent-warning);
+    background: rgba(255, 217, 61, 0.1);
+}
+
+.bad-day {
+    border-color: var(--accent-primary);
+    background: rgba(255, 107, 107, 0.1);
+}
+
+.calendar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 2px solid;
+}
+
+.legend-color.good-day {
+    background: rgba(107, 207, 127, 0.3);
+    border-color: var(--accent-tertiary);
+}
+
+.legend-color.neutral-day {
+    background: rgba(255, 217, 61, 0.3);
+    border-color: var(--accent-warning);
+}
+
+.legend-color.bad-day {
+    background: rgba(255, 107, 107, 0.3);
+    border-color: var(--accent-primary);
+}
+
+/* Стили для матрицы судьбы */
+.matrix-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.matrix-results {
+    margin-top: 30px;
+}
+
+.matrix-grid {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.matrix-3x3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 300px;
+    margin: 20px auto;
+}
+
+.matrix-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--card-border);
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.matrix-cell.filled {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.matrix-cell.empty {
+    background: var(--card-bg);
+    color: var(--text-muted);
+}
+
+.meaning-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border-left: 4px solid var(--accent-secondary);
+}
+
+.meaning-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--accent-primary);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.meaning-text {
+    flex-grow: 1;
+}
+
+/* Стили для профиля */
+.profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile-details {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.profile-avatar {
+    flex-shrink: 0;
+}
+
+.avatar-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--accent-secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.profile-data p {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+/* Стили для контактов */
+.contact-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.contact-item .contact-icon {
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.social-link {
+    padding: 5px 12px;
+    background: var(--card-bg);
+    border-radius: 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.social-link:hover {
+    background: var(--accent-secondary);
+    color: white;
+}
+
+/* Адаптивность для новых элементов */
+@media (max-width: 768px) {
+    .period-tabs {
+        flex-wrap: wrap;
+    }
+    
+    .horoscopes-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .articles-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .article-full {
+        padding: 25px;
+    }
+    
+    .article-header h1 {
+        font-size: 2rem;
+    }
+    
+    .calendar-grid {
+        gap: 5px;
+    }
+    
+    .matrix-3x3 {
+        max-width: 250px;
+    }
+    
+    .profile-details {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions .btn {
+        width: 100%;
+    }
+}
+.article-image {
+    height: 200px;
+    border-radius: 15px 15px 0 0;
+    margin: -30px -30px 20px -30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.article-category {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #0f0c29; /* Фиксированный темный цвет */
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+/* Стили для нового профиля */
+.profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.profile-edit,
+.profile-view {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.profile-header h3 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+}
+
+/* Аватар */
+.avatar-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.avatar-preview,
+.avatar-display {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 3px solid var(--card-border);
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-preview:hover,
+.avatar-display:hover {
+    border-color: var(--accent-warning);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 217, 61, 0.3);
+}
+
+.avatar-preview.has-avatar .avatar-placeholder,
+.avatar-display.has-avatar .avatar-placeholder {
+    display: none;
+}
+
+.avatar-placeholder {
+    font-size: 3rem;
+    opacity: 0.7;
+}
+
+.avatar-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+/* Форма */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--accent-warning);
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--input-border);
+    border-radius: 10px;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-warning);
+    box-shadow: 0 0 0 3px rgba(255, 217, 61, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Детали профиля */
+.profile-content {
+    text-align: center;
+}
+
+.profile-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.detail-item {
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--card-border);
+    transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.detail-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--accent-warning);
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.detail-value {
+    color: var(--text-primary);
+    word-break: break-word;
+    line-height: 1.4;
+}
+
+.zodiac-badge {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+}
+
+/* Гороскоп */
+.horoscope-preview {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(74, 144, 226, 0.1);
+    border: 1px solid rgba(74, 144, 226, 0.3);
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.horoscope-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+}
+
+.horoscope-preview h4 {
+    margin: 0 0 1rem 0;
+    color: var(--accent-warning);
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.horoscope-content {
+    color: var(--text-primary);
+    line-height: 1.6;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Кнопки */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.profile-actions {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+
+.btn-icon:hover {
+    background: var(--card-bg);
+    transform: scale(1.1);
+}
+
+.btn-text {
+    background: none;
+    border: none;
+    color: var(--accent-primary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.btn-text:hover {
+    color: var(--accent-secondary);
+}
+
+/* Индикатор загрузки */
+.btn-loader {
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Уведомления */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    padding: 12px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 300px;
+    border-left: 4px solid;
+    backdrop-filter: blur(10px);
+}
+
+.notification-success {
+    border-left-color: var(--accent-tertiary);
+    background: rgba(107, 207, 127, 0.1);
+}
+
+.notification-error {
+    border-left-color: var(--accent-primary);
+    background: rgba(255, 107, 107, 0.1);
+}
+
+.notification-info {
+    border-left-color: var(--accent-secondary);
+    background: rgba(77, 150, 255, 0.1);
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.notification-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Анимации уведомлений */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .profile-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .avatar-preview,
+    .avatar-display {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .avatar-placeholder {
+        font-size: 2.5rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions .btn {
+        width: 100%;
+    }
+    
+    .profile-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .profile-header h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-container {
+        padding: 0 10px;
+    }
+    
+    .profile-details {
+        gap: 0.5rem;
+    }
+    
+    .detail-item {
+        padding: 0.75rem;
+    }
+    
+    .horoscope-preview {
+        margin: 1rem 0;
+        padding: 1rem;
+    }
+    
+    .notification {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
+/* Специфические стили для полей формы профиля */
+#user-bio {
+    min-height: 100px;
+    resize: vertical;
+}
+
+#avatar-upload {
+    display: none;
+}
+
+/* Стили для состояния загрузки */
+.loading-state {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loading-state::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: inherit;
+}
+
+/* Улучшенные стили для select */
+.form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem;
+}
+
+/* Стили для placeholder */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Улучшенные стили для кнопок в профиле */
+.profile-actions .btn {
+    min-width: 150px;
+}
+
+/* Стили для пустых значений */
+.detail-value:empty::before {
+    content: 'Не указано';
+    color: var(--text-muted);
+    font-style: italic;
+}
+/* Исправления для кнопки Сохранить изменения */
+.btn-primary {
+    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+    color: white !important;
+}
+
+/* Убедимся, что текст на кнопках всегда контрастный */
+.btn {
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--accent-warning);
+    text-shadow: none;
+}
+
+.btn-outline:hover {
+    background: var(--accent-warning);
+    color: var(--bg-primary) !important;
+    transform: translateY(-5px);
+    text-shadow: none;
+}
+
+/* Специфично для кнопки в форме профиля */
+.form-actions .btn-primary {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Улучшаем видимость текста на кнопках при загрузке */
+.btn-loader {
+    border: 2px solid transparent;
+    border-top: 2px solid white !important;
+}
+
+/* Убедимся, что текст кнопки скрыт правильно при загрузке */
+.btn-text {
+    color: white !important;
+}
+/* Стили для иконки профиля */
+.profile-icon {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--accent-secondary);
+}
+
+.profile-icon-inner {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.profile-icon:hover .profile-icon-inner {
+    transform: scale(1.1);
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .profile-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .profile-icon-inner {
+        font-size: 1.1rem;
+    }
+}
+/* Обновить стили для иконки профиля */
+.profile-icon {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    overflow: hidden; /* ← ДОБАВИТЬ ЭТО */
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--accent-secondary);
+}
+
+.profile-icon-inner {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+    width: 100%; /* ← ДОБАВИТЬ ЭТО */
+    height: 100%; /* ← ДОБАВИТЬ ЭТО */
+    display: flex; /* ← ДОБАВИТЬ ЭТО */
+    align-items: center; /* ← ДОБАВИТЬ ЭТО */
+    justify-content: center; /* ← ДОБАВИТЬ ЭТО */
+}
+
+.profile-icon:hover .profile-icon-inner {
+    transform: scale(1.1);
+}
+
+/* Стили для аватара в иконке профиля */
+.profile-icon-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .profile-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .profile-icon-inner {
+        font-size: 1.1rem;
+    }
+}

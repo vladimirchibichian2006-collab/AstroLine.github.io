@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroLine — Статья</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars-bg"></div>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="main-title">AstroLine</h1>
+               <div class="header-controls">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
+        <span class="theme-icon">🌙</span>
+    </button>
+    <!-- ДОБАВИТЬ ЭТУ СТРОКУ -->
+    <a href="profile.html" class="profile-icon" aria-label="Профиль">
+        <span class="profile-icon-inner">👤</span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</div>
+            </div>
+            
+            <nav class="main-nav" id="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="horoscopes.html" class="nav-link">Гороскопы</a>
+                <a href="compat.html" class="nav-link">Совместимость</a>
+                <a href="moon.html" class="nav-link">Лунный календарь</a>
+                <a href="name-horo.html" class="nav-link">Гороскоп по имени</a>
+                <a href="test.html" class="nav-link">Тест личности</a>
+                <a href="articles.html" class="nav-link active">Статьи</a>
+                <a href="calendar.html" class="nav-link">Календарь</a>
+                <a href="matrix.html" class="nav-link">Матрица</a>
+                
+                <a href="contact.html" class="nav-link">Контакты</a>
+                <a href="about.html" class="nav-link">О сайте</a>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="article-container">
+                <a href="articles.html" class="back-link">← Назад к статьям</a>
+                <article id="article-content" class="article-full card">
+                    <!-- Контент статьи будет загружен здесь -->
+                </article>
+            </div>
+        </main>
+        
+        <footer class="site-footer">
+            <!-- Футер -->
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+    <script src="articlesData.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = parseInt(urlParams.get('id'));
+            const article = articlesData.find(a => a.id === articleId);
+            
+            if (article) {
+                document.title = `AstroLine — ${article.title}`;
+                const articleContent = document.getElementById('article-content');
+                
+                articleContent.innerHTML = `
+                    <header class="article-header">
+                        <span class="article-category-badge">${article.category}</span>
+                        <h1>${article.title}</h1>
+                        <div class="article-meta-full">
+                            <span class="article-date">${new Date(article.date).toLocaleDateString('ru-RU', { 
+                                year: 'numeric', 
+                                month: 'long', 
+                                day: 'numeric' 
+                            })}</span>
+                        </div>
+                    </header>
+                    <div class="article-body">
+                        ${article.content}
+                    </div>
+                    <footer class="article-footer">
+                        <a href="articles.html" class="btn btn-outline">← Все статьи</a>
+                    </footer>
+                `;
+            } else {
+                document.getElementById('article-content').innerHTML = `
+                    <div class="error-message">
+                        <h2>Статья не найдена</h2>
+                        <p>Запрошенная статья не существует или была удалена.</p>
+                        <a href="articles.html" class="btn btn-primary">Вернуться к статьям</a>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
